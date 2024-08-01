@@ -10,8 +10,9 @@ https://github.com/frohoff/ysoserial/releases/download/v0.0.6/ysoserial-all.jar
 
 # Install & Launch
 ```
-git clone https://github.com/NinjaGPT/yso-api/
+git clone https://github.com/NinjaGPT/yso-api/ & cd yso-api
 pip install -r requirements.txt
+wget https://github.com/frohoff/ysoserial/releases/download/v0.0.6/ysoserial-all.jar
 python3 yso-api.py
 ```
 default service port is 22222
