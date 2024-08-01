@@ -16,7 +16,20 @@ python3 yso-api.py
 ```
 default service port is 22222
 
- 
+# ⚠ Reminder
+ ```
+In Java 9 and later, the module system introduced stricter access control, restricting
+reflective access to non-public members. So in the use of ysoserial generated content
+will meet InaccessibleObjectException errors
+​
+Solution:
+1. Uses Java 8
+If possible, Java 8 can be used to generate the payload, which is not limited by the module system.
+​
+2. Adjust JVM startup parameters
+You can use the JVM startup parameter to open access to the java.net module. This can be done by adding the following parameters:
+--add-opens java.base/java.net=ALL-UNNAMED
+```
 
 # Usage
 
