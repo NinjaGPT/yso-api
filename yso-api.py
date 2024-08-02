@@ -58,7 +58,7 @@ dependency = {
 encoder = ['base64', 'xxd']
 
 # to sanitize the command
-chars = re.compile(r'^[\s\w:/\.\-\?]+$')
+chars = re.compile(r'^['";|\$]+$')
 
 # service port
 PORT = 22222
@@ -86,7 +86,7 @@ def generate_payload():
         return jsonify({"error": "unknown_chain"}), 400
 
     # check cmd
-    if not chars.match(cmd):
+    if chars.match(cmd):
         return jsonify({"error": "disabled_command"}), 400
 
     # check encode
@@ -97,6 +97,8 @@ def generate_payload():
             encode_command = 'base64 -w 0'
         else:
             encode_command = encode
+    else:
+        encode_command = encode
 
     # payload generating
     command = f"/usr/bin/java -jar ysoserial-all.jar {chain} '{cmd}' | {encode_command}"
