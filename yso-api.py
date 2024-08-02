@@ -58,7 +58,7 @@ dependency = {
 encoder = ['base64', 'xxd']
 
 # to sanitize the command
-chars = re.compile(r'^['";|\$]+$')
+chars = r"[\'\"]"
 
 # service port
 PORT = 22222
@@ -86,7 +86,7 @@ def generate_payload():
         return jsonify({"error": "unknown_chain"}), 400
 
     # check cmd
-    if chars.match(cmd):
+    if re.search(chars, cmd):
         return jsonify({"error": "disabled_command"}), 400
 
     # check encode
@@ -101,7 +101,7 @@ def generate_payload():
         encode_command = encode
 
     # payload generating
-    command = f"/usr/bin/java -jar ysoserial-all.jar {chain} '{cmd}' | {encode_command}"
+    command = f"/Users/chris/Library/Java/JavaVirtualMachines/corretto-1.8.0_392/Contents/Home/bin/java -jar ysoserial-all.jar {chain} '{cmd}' | {encode_command}"
     try:
         result = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
         return jsonify({"payload": result.decode('utf-8').strip()})
