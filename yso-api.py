@@ -101,7 +101,7 @@ def generate_payload():
         encode_command = encode
 
     # payload generating
-    command = f"/Users/chris/Library/Java/JavaVirtualMachines/corretto-1.8.0_392/Contents/Home/bin/java -jar ysoserial-all.jar {chain} '{cmd}' | {encode_command}"
+    command = f"/usr/bin/java8 -jar ysoserial-all.jar {chain} '{cmd}' | {encode_command}"
     try:
         result = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
         return jsonify({"payload": result.decode('utf-8').strip()})
